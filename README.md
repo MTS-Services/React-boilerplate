@@ -10,9 +10,9 @@ A modern, production-ready React + Redux + Tailwind CSS boilerplate with best pr
 - **Vite** - Lightning-fast build tool and development server
 - **React Router v7** - Client-side routing with latest React Router
 - **ESLint & Prettier** - Code quality and formatting tools
-- **Axios** - Promise-based HTTP client
+- **Axios** - Promise-based HTTP client with interceptors
 - **React Toastify** - Toast notifications
-- **Dark Mode Support** - Built-in dark mode with Tailwind CSS
+- **Lucide React** - Beautiful and consistent icon library
 - **Responsive Design** - Mobile-first responsive components
 - **TypeScript Ready** - Pre-configured for TypeScript projects
 
@@ -36,7 +36,18 @@ cd react-boilerplate
 npm install
 ```
 
-3. Start the development server:
+3. Create environment file:
+```bash
+cp .env.example .env
+```
+
+4. Configure your environment variables:
+```env
+VITE_API_BASE_URL=http://localhost:3000/api
+VITE_APP_NAME=React Boilerplate
+```
+
+5. Start the development server:
 ```bash
 npm run dev
 ```
@@ -48,6 +59,409 @@ The application will be available at `http://localhost:5173`
 - `npm run dev` - Start development server with Vite
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint to check code quality
+- `npm run format` - Format code with Prettier
+
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   ├── common/           # Shared components across features
+│   └── ui/              # Basic UI components (Button, Input, etc.)
+├── config/
+│   ├── constants.js     # Application constants
+│   └── env.js          # Environment variable validation
+├── features/
+│   ├── store.js        # Redux store configuration
+│   ├── auth/           # Authentication feature
+│   ├── counter/        # Counter example feature
+│   └── products/       # Products feature with API
+│       ├── productsAPI.js
+│       └── productsSlice.js
+├── pages/
+│   ├── admin/          # Admin-only pages
+│   ├── auth/           # Authentication pages
+│   ├── error/          # Error pages (404, 500, etc.)
+│   │   └── NotFound.jsx
+│   └── public/         # Public pages
+│       ├── public_about/
+│       │   └── AboutView.jsx
+│       ├── public_contact/
+│       │   └── ContactView.jsx
+│       └── public_Home/
+│           └── HomeView.jsx
+├── router/
+│   ├── router.jsx      # Main router configuration
+│   ├── guard/          # Route guards for authentication
+│   └── layout/         # Layout components
+│       ├── FooterLayout.jsx
+│       ├── NavbarLayout.jsx
+│       └── RootLayout.jsx
+├── services/
+│   ├── axiosInstance.js    # Configured Axios instance
+│   ├── httpEndpoint.js     # API endpoint definitions
+│   └── httpMethods.js      # HTTP method helpers
+└── utils/
+    ├── errorHandler.js     # Global error handling
+    ├── Helper.js          # General helper functions
+    ├── storage.js         # LocalStorage/SessionStorage helpers
+    └── validators.js      # Form validation functions
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+# API Configuration
+VITE_API_BASE_URL=http://localhost:3000/api
+
+# App Configuration
+VITE_APP_NAME=React Boilerplate
+```
+
+### Tailwind CSS
+
+Tailwind CSS 4 is configured with the `@tailwindcss/vite` plugin. Customize your design in the CSS file:
+
+```css
+@import "tailwindcss";
+
+@theme {
+  /* Your custom theme configuration */
+}
+```
+
+### Redux Store
+
+The store is configured in `src/features/store.js`. Add new features by creating slices:
+
+```javascript
+// src/features/myFeature/myFeatureSlice.js
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  data: [],
+  loading: false,
+  error: null
+};
+
+export const myFeatureSlice = createSlice({
+  name: 'myFeature',
+  initialState,
+  reducers: {
+    setData: (state, action) => {
+      state.data = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    }
+  }
+});
+
+export const { setData, setLoading, setError } = myFeatureSlice.actions;
+export default myFeatureSlice.reducer;
+```
+
+Then add it to the store:
+
+```javascript
+// src/features/store.js
+import { configureStore } from '@reduxjs/toolkit';
+import myFeatureReducer from './myFeature/myFeatureSlice';
+
+const store = configureStore({
+  reducer: {
+    myFeature: myFeatureReducer,
+    // ... other reducers
+  },
+});
+
+export default store;
+```
+
+## 📝 How to Use This Boilerplate
+
+### 1. Setting Up Your Project
+
+1. **Clone and Setup**: Follow the Quick Start guide above
+2. **Configure Environment**: Update `.env` with your API endpoints
+3. **Customize Branding**: Update app name, logo, and colors
+4. **Clean Example Code**: Remove example features you don't need
+
+### 2. Adding New Features
+
+#### Creating a New Page
+1. Create a new folder in `src/pages/public/` (or `admin/` for admin pages)
+2. Create your component file (e.g., `MyPageView.jsx`)
+3. Add the route in `src/router/router.jsx`
+
+```javascript
+// src/pages/public/my_page/MyPageView.jsx
+import React from 'react';
+
+const MyPageView = () => {
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1>My New Page</h1>
+    </div>
+  );
+};
+
+export default MyPageView;
+```
+
+```javascript
+// src/router/router.jsx
+import MyPageView from '../pages/public/my_page/MyPageView';
+
+// Add to your routes
+<Route path="my-page" element={<MyPageView />} />
+```
+
+#### Creating a New Redux Feature
+1. Create a new folder in `src/features/`
+2. Create your slice file following the pattern in `src/features/products/`
+3. Add API functions if needed
+4. Connect to the store
+
+### 3. Working with APIs
+
+The boilerplate includes a configured Axios instance in `src/services/axiosInstance.js`:
+
+```javascript
+// Example API call
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axiosInstance from '../../services/axiosInstance';
+
+export const fetchMyData = createAsyncThunk(
+  'myFeature/fetchMyData',
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get('/my-endpoint', { params });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+```
+
+### 4. Styling Components
+
+Use Tailwind CSS utility classes for styling:
+
+```javascript
+const MyComponent = () => {
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+      <h2 className="text-2xl font-bold text-gray-900 mb-4">Title</h2>
+      <p className="text-gray-600 leading-relaxed">Content</p>
+      <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+        Action
+      </button>
+    </div>
+  );
+};
+```
+
+### 5. Form Handling
+
+Example form with validation:
+
+```javascript
+import React, { useState } from 'react';
+
+const MyForm = () => {
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.email.includes('@')) newErrors.email = 'Valid email is required';
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = validate();
+    
+    if (Object.keys(newErrors).length === 0) {
+      // Handle successful submission
+      console.log('Form submitted:', formData);
+    } else {
+      setErrors(newErrors);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <input
+          type="text"
+          value={formData.name}
+          onChange={(e) => setFormData({...formData, name: e.target.value})}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          placeholder="Name"
+        />
+        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+      </div>
+      {/* More form fields... */}
+      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md">
+        Submit
+      </button>
+    </form>
+  );
+};
+```
+
+## 🔒 Authentication Setup
+
+To add authentication to your app:
+
+1. **Create Auth Slice** in `src/features/auth/authSlice.js`
+2. **Add Auth API** functions in `src/features/auth/authAPI.js`
+3. **Create Route Guards** in `src/router/guard/`
+4. **Update Axios Interceptors** to handle tokens
+
+Example auth slice:
+
+```javascript
+// src/features/auth/authSlice.js
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  user: null,
+  token: localStorage.getItem('token'),
+  isAuthenticated: false,
+  loading: false,
+  error: null
+};
+
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    loginStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    loginSuccess: (state, action) => {
+      state.loading = false;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isAuthenticated = true;
+      localStorage.setItem('token', action.payload.token);
+    },
+    loginFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+      state.isAuthenticated = false;
+    },
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      state.isAuthenticated = false;
+      localStorage.removeItem('token');
+    }
+  }
+});
+
+export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+export default authSlice.reducer;
+```
+
+## 🎨 Customization
+
+### Changing Colors and Themes
+Update your Tailwind theme by modifying the CSS:
+
+```css
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-500: #3b82f6;
+  --color-primary-900: #1e3a8a;
+}
+```
+
+### Adding Custom Components
+Create reusable components in `src/components/`:
+
+```javascript
+// src/components/ui/Card.jsx
+const Card = ({ children, className = '', ...props }) => {
+  return (
+    <div 
+      className={`bg-white rounded-lg shadow-md p-6 ${className}`} 
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+
+export default Card;
+```
+
+## 🚀 Deployment
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+### Deploy to Vercel
+
+1. Connect your repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### Deploy to Netlify
+
+1. Build the project: `npm run build`
+2. Deploy the `dist` folder to Netlify
+3. Configure redirects for SPA in `_redirects` file
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [React](https://reactjs.org/) - The web framework used
+- [Redux Toolkit](https://redux-toolkit.js.org/) - State management
+- [Tailwind CSS](https://tailwindcss.com/) - Styling framework
+- [Vite](https://vitejs.dev/) - Build tool
+- [Lucide](https://lucide.dev/) - Icon library
+
+## 📞 Support
+
+If you have any questions or need help getting started:
+
+- 📧 Email: hello@reactboilerplate.dev
+- 💬 Discord: [Join our community](https://discord.gg/reactboilerplate)
+- 🐛 Issues: [GitHub Issues](https://github.com/your-repo/issues)
+- 📖 Docs: [Documentation](https://docs.reactboilerplate.dev)
+
+---
+
+**Happy Coding!** 🎉
 - `npm run lint` - Run ESLint to check code quality
 - `npm run format` - Format code with Prettier
 
