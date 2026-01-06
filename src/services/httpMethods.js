@@ -1,22 +1,19 @@
 import axiosInstance from './axiosInstance';
 
-export const GET = async (url, params) => {
-  const { data: responseData } = await axiosInstance.get(url, { params });
-  return responseData;
+// Basic HTTP method wrappers - no error handling or response processing
+// Response processing and error handling delegated to apiExecutor
+export const GET = async (url, params, signal) => {
+  return axiosInstance.get(url, { params, signal });
 };
 
-// Optional: Add other HTTP methods for consistency
-export const POST = async (url, data) => {
-  const response = await axiosInstance.post(url, data);
-  return response.data;
+export const POST = async (url, data, signal) => {
+  return axiosInstance.post(url, data, { signal });
 };
 
-export const PUT = async (url, data) => {
-  const response = await axiosInstance.put(url, data);
-  return response.data;
+export const PUT = async (url, data, signal) => {
+  return axiosInstance.put(url, data, { signal });
 };
 
-export const DELETE = async (url) => {
-  const response = await axiosInstance.delete(url);
-  return response.data;
+export const DELETE = async (url, signal) => {
+  return axiosInstance.delete(url, { signal });
 };

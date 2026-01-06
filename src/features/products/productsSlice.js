@@ -25,10 +25,11 @@ const productsSlice = createSlice({
         state.success = null;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
+        const { data } = action.payload;
         state.loading = false;
         state.success = true;
         state.error = null;
-        state.list = action.payload.products || [];
+        state.list = data?.products || [];
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;

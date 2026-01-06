@@ -287,7 +287,7 @@ const HomeView = () => {
           </p>
         </div>
 
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-7xl overflow-hidden">
           <div className="rounded-xl bg-gray-900 p-6 font-mono text-sm text-green-400">
             <div className="mb-2 text-yellow-400">// Current Redux State:</div>
             <pre>{JSON.stringify(productsState, null, 2)}</pre>

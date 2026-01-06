@@ -1,15 +1,14 @@
 // Route Paths
-export const ROUTES_CONFIG = {
-  public: {
+export const ENDPOINT = {
+  PUBLIC: {
     HOME: '/',
     LOGIN: '/login',
     REGISTER: '/register',
-    PRODUCTS: '/api/products',
+    PRODUCTS: '/api/products?limit=5',
   },
-  private: {
+  PRIVATE: {
     DASHBOARD: '/dashboard',
     PROFILE: '/profile',
     SETTINGS: '/settings',
   },
 };
-// Storage keys

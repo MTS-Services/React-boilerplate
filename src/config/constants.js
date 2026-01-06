@@ -1,54 +1,44 @@
-import { ENV } from './env'; // config/env.js
+import { ENV } from './env';
 
-// Application Configuration
-export const APP_CONFIG = {
+/* ----------------------------- App ----------------------------- */
+export const APP_CONFIG = Object.freeze({
   NAME: 'React Boilerplate',
   VERSION: '1.0.0',
   DEFAULT_LANGUAGE: 'en',
   DEFAULT_THEME: 'light',
-  PAGINATION_LIMIT: 10,
-};
+  PAGINATION: {
+    DEFAULT_LIMIT: 10,
+    MAX_LIMIT: 100,
+  },
+});
 
-// API Configuration
-export const API_CONFIG = {
+/* ----------------------------- API ----------------------------- */
+export const API_CONFIG = Object.freeze({
   BASE_URL: ENV.API_BASE_URL,
-  TIMEOUT: ENV.IS_DEV ? 10000 : 5000,
+  TIMEOUT: ENV.IS_DEV ? 10_000 : 5_000,
   WITH_CREDENTIALS: false,
-};
+});
 
-// Authentication Configuration
-export const AUTH_CONFIG = {
+/* ----------------------------- Auth ---------------------------- */
+export const AUTH_CONFIG = Object.freeze({
   TOKEN_KEY: 'auth_token',
   USER_KEY: 'auth_user',
   LOGIN_REDIRECT: '/dashboard',
   LOGOUT_REDIRECT: '/login',
-};
+});
 
-// Route Paths
-export const ROUTES_CONFIG = {
-  public: {
-    HOME: '/',
-    LOGIN: '/login',
-    REGISTER: '/register',
-    PRODUCTS: '/api/products',
-  },
-  private: {
-    DASHBOARD: '/dashboard',
-    PROFILE: '/profile',
-    SETTINGS: '/settings',
-  },
-};
-
-// Storage keys
-export const STORAGE_CONFIG = {
-  TOKEN: 'auth_token',
-  USER: 'auth_user',
+/* --------------------------- Storage --------------------------- */
+export const STORAGE_KEYS = Object.freeze({
+  TOKEN: AUTH_CONFIG.TOKEN_KEY,
+  USER: AUTH_CONFIG.USER_KEY,
   THEME: 'app_theme',
-};
+});
 
-// Theme Configuration
-export const THEME_CONFIG = {
-  STORAGE_KEY: 'app_theme',
-  LIGHT: 'light',
-  DARK: 'dark',
-};
+/* ---------------------------- Theme ---------------------------- */
+export const THEME_CONFIG = Object.freeze({
+  STORAGE_KEY: STORAGE_KEYS.THEME,
+  MODES: {
+    LIGHT: 'light',
+    DARK: 'dark',
+  },
+});
