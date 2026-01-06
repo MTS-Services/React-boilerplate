@@ -1,28 +1,20 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from './features/products/productsAPI';
+import { RouterProvider } from 'react-router-dom';
 import { selectAllProducts } from './features/products/productsSlice';
+import { fetchProducts } from './features/products/productsAPI';
+import router from './router/router';
 
 function App() {
   const products = useSelector(selectAllProducts);
+  console.log('products:', products);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  return (
-    <section>
-      <h1 className="pt-02 bg-amber-400 text-3xl font-bold underline">Hello world!</h1>
-
-      <p className="pt-02 bg-amber-400 text-3xl font-bold underline">Vite + React</p>
-      <div className="card">
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-    </section>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
