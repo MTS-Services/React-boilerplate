@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, User, Mail, Github, User2 } from 'lucide-react';
+import { Menu, X, User2 } from 'lucide-react';
+import Container from '../../components/ui/Container';
+import Button from '../../components/ui/Button';
 
 const NavbarLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,8 +19,8 @@ const NavbarLayout = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="border-b border-gray-200 bg-[#0055C4] shadow-sm">
-      <div className="container mx-auto px-4">
+    <nav className="bg-blue-500">
+      <Container>
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
@@ -61,19 +63,19 @@ const NavbarLayout = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button
+            <Button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-100 hover:text-gray-900 focus:outline-none"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+            </Button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="pb-4 md:hidden">
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-1">
               {navigation.map((item) => {
                 return (
                   <Link
@@ -83,7 +85,7 @@ const NavbarLayout = () => {
                     className={`flex items-center space-x-2 rounded-md px-3 py-2 text-base font-medium transition-colors ${
                       isActive(item.href)
                         ? 'bg-blue-50 text-blue-600'
-                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                        : 'text-gray-100 hover:bg-gray-100 hover:text-gray-900'
                     }`}
                   >
                     <span>{item.name}</span>
@@ -93,7 +95,7 @@ const NavbarLayout = () => {
             </div>
           </div>
         )}
-      </div>
+      </Container>
     </nav>
   );
 };

@@ -1,7 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 
-import RootLayout from './layout/RootLayout';
-
+import RootLayout from '../layout/public/RootLayout';
 import HomeView from '../pages/public/public_Home/HomeView';
 import AboutView from '../pages/public/public_about/AboutView';
 import ContactView from '../pages/public/public_contact/ContactView';
