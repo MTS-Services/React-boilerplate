@@ -4,7 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Logo = () => (
   <div className="mb-10 flex items-center gap-2">
-    <img src="/img/logo-white.png" alt="" />
+    <Link to="/">
+      <img src="/img/logo-white.png" alt="" />
+    </Link>
   </div>
 );
 
@@ -42,7 +44,7 @@ const ResetPasswordView = () => {
           </button>
 
           <h1 className="mb-2 text-[2rem] leading-tight font-semibold text-[#111b2b]">
-            Reset Password
+            Forgot your password?
           </h1>
           <p className="mb-8 text-[15px] text-[#6b7280]">
             Don’t worry, happens to all of us. Enter your email below to recover your password.

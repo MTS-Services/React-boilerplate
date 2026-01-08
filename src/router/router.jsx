@@ -14,6 +14,7 @@ import AuthLayout from '../layout/auth/AuthLayout';
 import RegisterView from '../pages/auth/RegisterView';
 import LoginView from '../pages/auth/LoginView';
 import ResetPasswordView from '../pages/auth/ResetPasswordView';
+import SetPasswordView from '../pages/auth/SetPasswordView';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
         <Route path="login" element={<LoginView />} />
         <Route path="register" element={<RegisterView />} />
         <Route path="reset-password" element={<ResetPasswordView />} />
+        <Route path="set-password" element={<SetPasswordView />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

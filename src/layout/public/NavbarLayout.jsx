@@ -46,11 +46,11 @@ const NavbarLayout = () => {
 
           <div className="hidden items-center space-x-6 md:flex">
             {/* Additional right-side items can be added here */}
-            <Link to="/login" className="flex items-center text-white">
+            <Link to="/auth/login" className="flex items-center text-white">
               <User2 className="mr-1 inline-block h-5 w-5" />
               Log In
             </Link>
-            <Link to="/join" className="text-white">
+            <Link to="/auth/register" className="text-white">
               Join Free
             </Link>
             <Link
