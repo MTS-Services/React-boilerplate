@@ -11,7 +11,7 @@ const HeroSection = () => {
   const prev = () => setCurrent((p) => (p - 1 + slides.length) % slides.length);
 
   return (
-    <section className="bg-gradient-to-b from-blue-500 via-blue-400 to-blue-100 px-4 py-20 text-white">
+    <section className="bg-gradient-to-b from-blue-500 via-blue-300 to-blue-100 px-4 py-20 text-white">
       <Container>
         <Col grow>
           <h1 className="text-center text-4xl leading-tight font-bold text-white md:text-5xl lg:text-6xl">

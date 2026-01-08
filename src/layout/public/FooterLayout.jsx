@@ -56,7 +56,7 @@ const FooterLayout = () => {
             </nav>
 
             <p className="text-blue-100/90">
-              Copyright © 2018 • <span className="font-semibold">Deal Hunter</span>
+              Copyright © 2026 • <span className="font-semibold">Deal Hunter</span>
             </p>
           </div>
         </div>

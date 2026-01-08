@@ -17,7 +17,7 @@ const ReadySection = () => {
           <div className="mt-8 flex justify-center">
             <a
               href="#"
-              className="inline-flex items-center justify-center rounded-lg border border-white/70 bg-blue-500 px-8 py-3 text-base font-semibold text-white shadow hover:bg-blue-600"
+              className="inline-flex items-center justify-center rounded-lg border border-white/70 bg-white px-8 py-3 text-base font-semibold shadow hover:bg-blue-600 hover:text-white"
             >
               Get Start
             </a>
