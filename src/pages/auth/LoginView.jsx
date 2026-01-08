@@ -1,4 +1,6 @@
+import { EyeIcon, EyeOff } from 'lucide-react';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Logo = () => (
   <div className="mb-10 flex items-center gap-2">
@@ -64,28 +66,7 @@ const LoginView = () => {
                   onClick={() => setShow((s) => !s)}
                   className="text-gray-500 hover:text-[#2f66ff]"
                 >
-                  {show ? (
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                    >
-                      <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C7 20 2.73 16.11 1 12c.62-1.45 1.55-2.78 2.73-3.94M9.9 4.24A10.94 10.94 0 0 1 12 4c5 0 9.27 3.89 11 8-1 2.35-2.67 4.44-4.73 5.94M15 12a3 3 0 0 1-3 3m0-6a3 3 0 0 1 3 3M3 3l18 18" />
-                    </svg>
-                  ) : (
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                    >
-                      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                  )}
+                  {show ? <EyeOff /> : <EyeIcon />}
                 </button>
               }
             />
@@ -98,7 +79,9 @@ const LoginView = () => {
                 />
                 Remember me
               </label>
-              <a className="text-[14px] text-rose-400 hover:underline">Forgot Password</a>
+              <Link to="/auth/reset-password" className="text-[14px] text-rose-400 hover:underline">
+                Forgot Password
+              </Link>
             </div>
 
             <button
@@ -110,7 +93,10 @@ const LoginView = () => {
           </form>
 
           <p className="mt-6 text-center text-[14px] text-[#6b7280]">
-            Don't have an account? <a className="text-rose-400 hover:underline">Sign up</a>
+            Don't have an account?{' '}
+            <Link to="/auth/register" className="text-rose-400 hover:underline">
+              Sign up
+            </Link>
           </p>
         </div>
 

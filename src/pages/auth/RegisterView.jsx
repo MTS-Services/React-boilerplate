@@ -1,13 +1,10 @@
+import { Eye, EyeOff } from 'lucide-react';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Logo = () => (
   <div className="mb-10 flex items-center gap-2">
-    <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[#2f66ff] text-white">
-      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
-        <path d="M12 3c4.97 0 9 4.03 9 9 0 5.52-4.48 9-9 9S3 17.52 3 12c0-2.31.79-4.43 2.11-6.1C5.04 8.33 7.83 11 12 11c2.76 0 5-2.24 5-5 0-.7-.14-1.36-.39-1.96A8.94 8.94 0 0 1 12 3z" />
-      </svg>
-    </span>
-    <span className="text-xl font-semibold text-[#111b2b]">Deal Hunter</span>
+    <img src="/img/logo-white.png" alt="white" />
   </div>
 );
 
@@ -27,94 +24,146 @@ const TextInput = ({ label, type = 'text', placeholder, value, onChange, right }
   </label>
 );
 
+const EyeIcon = ({ show, onClick }) => (
+  <button
+    type="button"
+    aria-label={show ? 'Hide password' : 'Show password'}
+    onClick={onClick}
+    className="text-gray-500 hover:text-[#2f66ff]"
+  >
+    {show ? <EyeOff /> : <Eye />}
+  </button>
+);
+
 const RegisterView = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [show, setShow] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
+
+  const handleChange = (field) => (e) => {
+    setFormData({ ...formData, [field]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission
+  };
 
   return (
-    <section className="bg-[#f9fafb]">
+    <section className="min-h-screen bg-[#f9fafb]">
       <div className="grid grid-cols-1 items-center md:grid-cols-2">
         {/* Right: image */}
-        <div className="">
+        <div className="order-2 md:order-1">
           <img src="/img/login.png" alt="City skyline" className="h-screen w-full object-cover" />
         </div>
         {/* Left: form */}
-        <div className="px-6 py-10 md:p-24 lg:px-32">
+        <div className="order-1 px-6 py-10 md:order-2 md:p-24 lg:px-32">
           <Logo />
 
-          <h1 className="mb-2 text-[2rem] leading-tight font-semibold text-[#111b2b]">Login</h1>
-          <p className="mb-8 text-[15px] text-[#6b7280]">Login to access your travelwise account</p>
+          <h1 className="mb-2 text-[2rem] leading-tight font-semibold text-[#111b2b]">Sign up</h1>
+          <p className="mb-8 text-[15px] text-[#6b7280]">
+            Let's get you all set up so you can access your personal account.
+          </p>
 
-          <form className="space-y-5">
-            <TextInput
-              label="Email"
-              type="email"
-              placeholder="john.doe@gmail.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* First Name and Last Name in one row */}
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <TextInput
+                label="First Name"
+                type="text"
+                placeholder="Nayem"
+                value={formData.firstName}
+                onChange={handleChange('firstName')}
+              />
+              <TextInput
+                label="Last Name"
+                type="text"
+                placeholder="Islam"
+                value={formData.lastName}
+                onChange={handleChange('lastName')}
+              />
+            </div>
 
+            {/* Email and Phone Number in one row */}
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <TextInput
+                label="Email"
+                type="email"
+                placeholder="john.doe@gmail.com"
+                value={formData.email}
+                onChange={handleChange('email')}
+              />
+              <TextInput
+                label="Phone Number"
+                type="tel"
+                placeholder="+1 234 567 890"
+                value={formData.phoneNumber}
+                onChange={handleChange('phoneNumber')}
+              />
+            </div>
+
+            {/* Password field */}
             <TextInput
               label="Password"
-              type={show ? 'text' : 'password'}
+              type={showPassword ? 'text' : 'password'}
               placeholder="••••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={handleChange('password')}
+              right={<EyeIcon show={showPassword} onClick={() => setShowPassword(!showPassword)} />}
+            />
+
+            {/* Confirm Password field */}
+            <TextInput
+              label="Confirm Password"
+              type={showConfirmPassword ? 'text' : 'password'}
+              placeholder="••••••••••"
+              value={formData.confirmPassword}
+              onChange={handleChange('confirmPassword')}
               right={
-                <button
-                  type="button"
-                  aria-label={show ? 'Hide password' : 'Show password'}
-                  onClick={() => setShow((s) => !s)}
-                  className="text-gray-500 hover:text-[#2f66ff]"
-                >
-                  {show ? (
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                    >
-                      <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C7 20 2.73 16.11 1 12c.62-1.45 1.55-2.78 2.73-3.94M9.9 4.24A10.94 10.94 0 0 1 12 4c5 0 9.27 3.89 11 8-1 2.35-2.67 4.44-4.73 5.94M15 12a3 3 0 0 1-3 3m0-6a3 3 0 0 1 3 3M3 3l18 18" />
-                    </svg>
-                  ) : (
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                    >
-                      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                  )}
-                </button>
+                <EyeIcon
+                  show={showConfirmPassword}
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                />
               }
             />
 
-            <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 text-[14px] text-[#111b2b]">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-[#2f66ff] focus:ring-[#2f66ff]"
-                />
-                Remember me
+            {/* Terms and Conditions checkbox */}
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="terms"
+                className="h-4 w-4 rounded border-gray-300 text-[#2f66ff] focus:ring-[#2f66ff]"
+                checked={agreeTerms}
+                onChange={(e) => setAgreeTerms(e.target.checked)}
+              />
+              <label htmlFor="terms" className="ml-2 text-[14px] text-[#111b2b]">
+                I agree to all the Terms and Privacy Policies
               </label>
-              <a className="text-[14px] text-rose-400 hover:underline">Forgot Password</a>
             </div>
 
+            {/* Create Account button */}
             <button
               type="submit"
               className="w-full rounded-md bg-[#2f66ff] py-3 font-medium text-white transition hover:bg-[#1f4fe0]"
             >
-              Login
+              Create account
             </button>
           </form>
 
+          {/* Already have an account link */}
           <p className="mt-6 text-center text-[14px] text-[#6b7280]">
-            Don't have an account? <a className="text-rose-400 hover:underline">Sign up</a>
+            Already have an account?{' '}
+            <Link to="/auth/login" className="text-rose-400 hover:underline">
+              Login
+            </Link>
           </p>
         </div>
       </div>
