@@ -4,6 +4,7 @@ import ChatHistory from './components/ChatHistory';
 import ProfileSettings from './components/ProfileSettings';
 
 const SidebarLayout = () => {
+  const isPaidUser = false;
   // Actual chat history data mimicking real conversations
   const chatsHistory = [
     {
@@ -144,44 +145,59 @@ const SidebarLayout = () => {
   ];
 
   return (
-    <div className="flex h-screen w-80 flex-col border-r border-gray-200 bg-gray-50 font-sans">
+    <div className="sticky top-0 flex h-screen w-80 flex-col border-r border-gray-200 bg-gray-50 font-sans">
       {/* Header */}
       <div className="border-b border-gray-200 p-5">
         <img src="/img/logo-white.png" alt="New Chat" />
       </div>
+      {isPaidUser ? (
+        <>
+          {/* New Chat Button */}
+          <div className="p-4">
+            <button className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-blue-700">
+              + New Chat
+            </button>
+          </div>
 
-      {/* New Chat Button */}
-      <div className="p-4">
-        <button className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-blue-700">
-          + New Chat
-        </button>
-      </div>
+          {/* Search */}
+          <div className="px-4 pb-4">
+            <div className="relative">
+              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search chats"
+                className="w-full rounded-lg border border-gray-300 py-2 pr-3 pl-10 text-sm focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              />
+            </div>
+          </div>
 
-      {/* Search */}
-      <div className="px-4 pb-4">
-        <div className="relative">
-          <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search chats"
-            className="w-full rounded-lg border border-gray-300 py-2 pr-3 pl-10 text-sm focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          />
-        </div>
-      </div>
-
-      {/* Your Chats Section */}
-      <div className="flex-1 overflow-hidden">
-        <h3 className="mb-3 px-5 text-xs font-semibold tracking-wider text-gray-500 uppercase">
-          Your chats
-        </h3>
-        <div className="h-[460px] overflow-y-auto px-4">
-          <div className="space-y-2">
-            {chatsHistory.map((chat) => (
-              <ChatHistory key={chat.id} chat={chat} />
-            ))}
+          {/* Your Chats Section */}
+          <div className="flex-1 overflow-hidden">
+            <h3 className="mb-3 px-5 text-xs font-semibold tracking-wider text-gray-500 uppercase">
+              Your chats
+            </h3>
+            <div className="h-[460px] overflow-y-auto px-4">
+              <div className="space-y-2">
+                {chatsHistory.map((chat) => (
+                  <ChatHistory key={chat.id} chat={chat} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="flex flex-1 items-center justify-center px-6">
+          <div className="text-center">
+            <h2 className="mb-4 text-lg font-semibold text-gray-800">Upgrade your plan</h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Unlock features and enjoy access by upgrading to a premium plan.
+            </p>
+            <button className="rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-blue-700">
+              Upgrade Now
+            </button>
           </div>
         </div>
-      </div>
+      )}
 
       {/* User Profile & Settings */}
       <ProfileSettings />
