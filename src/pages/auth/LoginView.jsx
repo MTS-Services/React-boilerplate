@@ -4,12 +4,9 @@ import { Link } from 'react-router-dom';
 
 const Logo = () => (
   <div className="mb-10 flex items-center gap-2">
-    <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[#2f66ff] text-white">
-      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
-        <path d="M12 3c4.97 0 9 4.03 9 9 0 5.52-4.48 9-9 9S3 17.52 3 12c0-2.31.79-4.43 2.11-6.1C5.04 8.33 7.83 11 12 11c2.76 0 5-2.24 5-5 0-.7-.14-1.36-.39-1.96A8.94 8.94 0 0 1 12 3z" />
-      </svg>
-    </span>
-    <span className="text-xl font-semibold text-[#111b2b]">Deal Hunter</span>
+    <Link to="/">
+      <img src="/img/logo-white.png" alt="" />
+    </Link>
   </div>
 );
 

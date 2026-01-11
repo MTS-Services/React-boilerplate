@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 
 const Logo = () => (
   <div className="mb-10 flex items-center gap-2">
-    <img src="/img/logo-white.png" alt="white" />
+    <Link to="/">
+      <img src="/img/logo-white.png" alt="" />
+    </Link>
   </div>
 );
 
