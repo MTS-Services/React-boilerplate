@@ -25,6 +25,7 @@ import DashLayout from '../layout/dash/DashLayout';
 // Views
 import DashboardView from '../pages/dash/dash_home/DashboardView';
 import DashPricingView from '../pages/dash/dash_pricing/DashPricingView';
+import AIChatView from '../pages/dash/dash_chats/AIChatView';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -51,7 +52,7 @@ const router = createBrowserRouter(
         {/* Dashboard related routes can be added here */}
         <Route index element={<DashboardView />} />
         <Route path="pricing" element={<DashPricingView />} />
-        <Route path="gpt-chat" element={<div>Dashboard GPT Chat</div>} />
+        <Route path="ai-chat" element={<AIChatView />} />
         <Route path="settings" element={<div>Dashboard Settings</div>} />
       </Route>
 

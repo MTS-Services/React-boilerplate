@@ -3,7 +3,7 @@ import SidebarLayout from './SidebarLayout';
 
 const DashLayout = () => {
   return (
-    <main className="flex min-h-screen gap-4 bg-slate-200">
+    <main className="flex min-h-screen bg-slate-200">
       <aside className="">
         <SidebarLayout />
       </aside>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Search } from 'lucide-react';
 import ChatHistory from './components/ChatHistory';
 import ProfileSettings from './components/ProfileSettings';
@@ -147,8 +146,8 @@ const SidebarLayout = () => {
   return (
     <div className="sticky top-0 flex h-screen w-80 flex-col border-r border-gray-200 bg-gray-50 font-sans">
       {/* Header */}
-      <div className="border-b border-gray-200 p-5">
-        <img src="/img/logo-white.png" alt="New Chat" />
+      <div className="flex justify-center border-b border-gray-200 p-5">
+        <img src="/img/logo-white.png" alt="New Chat" className="w-44" />
       </div>
       {isPaidUser ? (
         <>
