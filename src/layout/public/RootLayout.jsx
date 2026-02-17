@@ -5,7 +5,7 @@ import FooterLayout from './FooterLayout';
 const RootLayout = () => {
   return (
     <>
-      <header>
+      <header className="sticky top-0 z-50">
         <NavbarLayout />
       </header>
       <main>
