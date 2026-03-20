@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 
-import RootLayout from './layout/RootLayout';
+import RootLayout from '../layout/public/RootLayout';
 import LoadingFallback from './components/LoadingFallback';
 
 // Lazy load page components for code splitting
