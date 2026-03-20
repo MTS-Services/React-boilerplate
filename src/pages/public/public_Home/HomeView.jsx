@@ -131,7 +131,7 @@ const HomeView = () => {
 
           <Heading as="h1" size="6xl" align="center" className="mb-6" color="muted">
             Build Modern React Apps
-            <span className="bg-linear-to-r from-blue-200 to-yellow-500 bg-clip-text text-transparent">
+            <span className="from-blue-00 bg-linear-to-r to-purple-800 bg-clip-text text-transparent">
               {' '}
               Faster
             </span>
