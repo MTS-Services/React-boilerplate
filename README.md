@@ -2,6 +2,16 @@
 
 A modern, production-ready React + Redux + Tailwind CSS boilerplate with best practices, feature-rich setup, and comprehensive tooling.
 
+**Architecture Score**: 7.4/10 | [📚 Documentation Index](DOCS_INDEX.md)
+
+## 📚 Documentation Hub
+
+- **[📖 Documentation Index](DOCS_INDEX.md)** - Navigate all documentation
+- **[🏗️ Architecture Assessment](ARCHITECTURE_ASSESSMENT.md)** - Comprehensive analysis, scoring, and roadmap
+- **[⚡ Quick Performance Wins](QUICK_WINS.md)** - Fast optimizations (2-4 hours)
+- **[✅ Performance Checklist](PERFORMANCE_CHECKLIST.md)** - Complete performance audit checklist
+- **[📄 This README](#)** - Setup guide and basic usage
+
 ## ✨ Features
 
 - **React 19** - Latest React with hooks support
@@ -20,34 +30,39 @@ A modern, production-ready React + Redux + Tailwind CSS boilerplate with best pr
 
 ### Prerequisites
 
-- Node.js 16+ 
+- Node.js 16+
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd react-boilerplate
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Create environment file:
+
 ```bash
 cp .env.example .env
 ```
 
 4. Configure your environment variables:
+
 ```env
 VITE_API_BASE_URL=http://localhost:3000/api
 VITE_APP_NAME=React Boilerplate
 ```
 
 5. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -128,7 +143,7 @@ VITE_APP_NAME=React Boilerplate
 Tailwind CSS 4 is configured with the `@tailwindcss/vite` plugin. Customize your design in the CSS file:
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Your custom theme configuration */
@@ -146,7 +161,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   data: [],
   loading: false,
-  error: null
+  error: null,
 };
 
 export const myFeatureSlice = createSlice({
@@ -161,8 +176,8 @@ export const myFeatureSlice = createSlice({
     },
     setError: (state, action) => {
       state.error = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const { setData, setLoading, setError } = myFeatureSlice.actions;
@@ -198,6 +213,7 @@ export default store;
 ### 2. Adding New Features
 
 #### Creating a New Page
+
 1. Create a new folder in `src/pages/public/` (or `admin/` for admin pages)
 2. Create your component file (e.g., `MyPageView.jsx`)
 3. Add the route in `src/router/router.jsx`
@@ -222,10 +238,11 @@ export default MyPageView;
 import MyPageView from '../pages/public/my_page/MyPageView';
 
 // Add to your routes
-<Route path="my-page" element={<MyPageView />} />
+<Route path="my-page" element={<MyPageView />} />;
 ```
 
 #### Creating a New Redux Feature
+
 1. Create a new folder in `src/features/`
 2. Create your slice file following the pattern in `src/features/products/`
 3. Add API functions if needed
@@ -260,10 +277,10 @@ Use Tailwind CSS utility classes for styling:
 ```javascript
 const MyComponent = () => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">Title</h2>
-      <p className="text-gray-600 leading-relaxed">Content</p>
-      <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+    <div className="rounded-lg bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
+      <h2 className="mb-4 text-2xl font-bold text-gray-900">Title</h2>
+      <p className="leading-relaxed text-gray-600">Content</p>
+      <button className="mt-4 rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700">
         Action
       </button>
     </div>
@@ -292,7 +309,7 @@ const MyForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = validate();
-    
+
     if (Object.keys(newErrors).length === 0) {
       // Handle successful submission
       console.log('Form submitted:', formData);
@@ -307,14 +324,14 @@ const MyForm = () => {
         <input
           type="text"
           value={formData.name}
-          onChange={(e) => setFormData({...formData, name: e.target.value})}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          className="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500"
           placeholder="Name"
         />
-        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+        {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
       </div>
       {/* More form fields... */}
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md">
+      <button type="submit" className="rounded-md bg-blue-600 px-4 py-2 text-white">
         Submit
       </button>
     </form>
@@ -342,7 +359,7 @@ const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: false,
   loading: false,
-  error: null
+  error: null,
 };
 
 export const authSlice = createSlice({
@@ -370,8 +387,8 @@ export const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
       localStorage.removeItem('token');
-    }
-  }
+    },
+  },
 });
 
 export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
@@ -381,6 +398,7 @@ export default authSlice.reducer;
 ## 🎨 Customization
 
 ### Changing Colors and Themes
+
 Update your Tailwind theme by modifying the CSS:
 
 ```css
@@ -392,16 +410,14 @@ Update your Tailwind theme by modifying the CSS:
 ```
 
 ### Adding Custom Components
+
 Create reusable components in `src/components/`:
 
 ```javascript
 // src/components/ui/Card.jsx
 const Card = ({ children, className = '', ...props }) => {
   return (
-    <div 
-      className={`bg-white rounded-lg shadow-md p-6 ${className}`} 
-      {...props}
-    >
+    <div className={`rounded-lg bg-white p-6 shadow-md ${className}`} {...props}>
       {children}
     </div>
   );
@@ -462,6 +478,7 @@ If you have any questions or need help getting started:
 ---
 
 **Happy Coding!** 🎉
+
 - `npm run lint` - Run ESLint to check code quality
 - `npm run format` - Format code with Prettier
 
@@ -537,8 +554,12 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
-      colors: { /* ... */ },
-      spacing: { /* ... */ },
+      colors: {
+        /* ... */
+      },
+      spacing: {
+        /* ... */
+      },
     },
   },
   darkMode: 'class',
@@ -552,7 +573,9 @@ Redux slices are located in `src/store/slices/`. Create new slices for different
 ```javascript
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { /* ... */ };
+const initialState = {
+  /* ... */
+};
 
 export const featureSlice = createSlice({
   name: 'feature',
@@ -562,7 +585,9 @@ export const featureSlice = createSlice({
   },
 });
 
-export const { /* actions */ } = featureSlice.actions;
+export const {
+  /* actions */
+} = featureSlice.actions;
 export default featureSlice.reducer;
 ```
 
@@ -591,11 +616,7 @@ export default function Component() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.app.theme);
 
-  return (
-    <button onClick={() => dispatch(toggleTheme())}>
-      Current theme: {theme}
-    </button>
-  );
+  return <button onClick={() => dispatch(toggleTheme())}>Current theme: {theme}</button>;
 }
 ```
 
@@ -649,6 +670,7 @@ Versatile button component with multiple variants and sizes.
 ```
 
 **Props:**
+
 - `variant`: `'primary'` | `'secondary'` | `'danger'` (default: `'primary'`)
 - `size`: `'sm'` | `'md'` | `'lg'` (default: `'md'`)
 - `className`: Additional CSS classes
@@ -666,6 +688,7 @@ Container component for grouping content.
 ```
 
 **Props:**
+
 - `children`: Card content
 - `className`: Additional CSS classes
 
@@ -683,9 +706,7 @@ Dark mode is built-in using Tailwind's class-based dark mode. To enable dark mod
 
 ```javascript
 // In your component
-<div className="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
-  Content
-</div>
+<div className="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">Content</div>
 ```
 
 The `ThemeToggle` component is already integrated and manages the theme state via Redux.
@@ -693,24 +714,29 @@ The `ThemeToggle` component is already integrated and manages the theme state vi
 ## 📚 Dependencies
 
 ### Core Dependencies
+
 - **react** - UI library
 - **react-dom** - DOM rendering
 - **react-redux** - Redux bindings for React
 - **@reduxjs/toolkit** - Redux state management
 
 ### Styling
+
 - **tailwindcss** - Utility-first CSS framework
 - **@tailwindcss/vite** - Vite plugin for Tailwind CSS
 - **clsx** - Utility for constructing className strings
 
 ### Routing & HTTP
+
 - **react-router-dom** - Client-side routing
 - **axios** - HTTP client
 
 ### UI & Notifications
+
 - **react-toastify** - Toast notifications
 
 ### Development Tools
+
 - **vite** - Build tool
 - **eslint** - Code quality
 - **prettier** - Code formatter
@@ -805,4 +831,5 @@ Ensure `Provider` wraps your app in `main.jsx` and the store is properly configu
 ---
 
 Built with ❤️ using React, Redux, and Tailwind CSS
+
 # React-boilerplate

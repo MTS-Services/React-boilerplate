@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import {
   Code,
@@ -16,6 +15,7 @@ import {
   Terminal,
   Package,
 } from 'lucide-react';
+import { Button, Card, Container, Grid, Heading, Text } from '@/components/ui';
 
 const HomeView = () => {
   const productsState = useSelector((state) => state.products);
@@ -120,138 +120,154 @@ const HomeView = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <>
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700">
+      <section className="flex h-screen items-center justify-center bg-linear-to-br from-[#090053] via-[#16013b] via-20% to-[#000714] text-center">
+        <Container maxWidth="xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-blue-100 shadow-lg backdrop-blur-lg">
             <Rocket className="h-4 w-4" />
             React Redux Tailwind Boilerplate
           </div>
 
-          <h1 className="mb-6 text-5xl leading-tight font-bold text-gray-900 md:text-6xl">
+          <Heading as="h1" size="6xl" align="center" className="mb-6" color="muted">
             Build Modern React Apps
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-200 to-yellow-500 bg-clip-text text-transparent">
               {' '}
               Faster
             </span>
-          </h1>
+          </Heading>
 
-          <p className="mx-auto mb-8 max-w-2xl text-xl leading-relaxed text-gray-600">
+          <Text size="xl" color="muted" align="center" className="mx-auto mb-8 max-w-4xl">
             A production-ready React boilerplate with Redux Toolkit, Tailwind CSS, and modern
             development tools. Everything you need to start building amazing applications.
-          </p>
+          </Text>
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <button className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 font-semibold text-white transition-all duration-300 hover:shadow-lg">
-              <Github className="h-5 w-5" />
+            <Button
+              size="lg"
+              variant="secondary"
+              leftIcon={<Github className="h-5 w-5" />}
+              rightIcon={<ArrowRight className="h-4 w-4" />}
+            >
               Get Started
-              <ArrowRight className="h-4 w-4" />
-            </button>
-            <button className="flex items-center gap-2 rounded-lg border border-gray-300 px-8 py-3 font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50">
-              <ExternalLink className="h-4 w-4" />
+            </Button>
+            <Button variant="outline" size="lg" leftIcon={<ExternalLink className="h-4 w-4" />}>
               Live Demo
-            </button>
+            </Button>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-gray-900">Powerful Features</h2>
-          <p className="mx-auto max-w-2xl text-gray-600">
-            Everything you need for modern React development, pre-configured and ready to use.
-          </p>
-        </div>
+      <section className="py-16">
+        <Container size="lg">
+          <div className="mb-12 text-center">
+            <Heading as="h2" size="3xl" className="mb-4">
+              Powerful Features
+            </Heading>
+            <Text color="muted" className="mx-auto max-w-2xl">
+              Everything you need for modern React development, pre-configured and ready to use.
+            </Text>
+          </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md"
-            >
-              <div className={`${feature.color} mb-4`}>{feature.icon}</div>
-              <h3 className="mb-2 text-xl font-semibold text-gray-900">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </div>
-          ))}
-        </div>
+          <Grid cols={{ default: 1, md: 2, lg: 3 }} gap="lg">
+            {features.map((feature, index) => (
+              <Card
+                key={index}
+                variant="outlined"
+                className="transition-all duration-300 hover:shadow-md"
+              >
+                <div className={`${feature.color} mb-4`}>{feature.icon}</div>
+                <Heading as="h3" size="xl" className="mb-2">
+                  {feature.title}
+                </Heading>
+                <Text color="muted">{feature.description}</Text>
+              </Card>
+            ))}
+          </Grid>
+        </Container>
       </section>
 
       {/* Quick Start Section */}
       <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
+        <Container size="lg">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-gray-900">Quick Start Guide</h2>
-            <p className="mx-auto max-w-2xl text-gray-600">
+            <Heading as="h2" size="3xl" className="mb-4">
+              Quick Start Guide
+            </Heading>
+            <Text color="muted" className="mx-auto max-w-2xl">
               Get up and running in minutes with these simple steps.
-            </p>
+            </Text>
           </div>
 
           <div className="mx-auto max-w-4xl">
-            <div className="grid gap-8 md:grid-cols-2">
+            <Grid cols={{ default: 1, md: 2 }} gap="lg">
               {quickStartSteps.map((step, index) => (
-                <div
-                  key={index}
-                  className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm"
-                >
+                <Card key={index} variant="elevated">
                   <div className="mb-4 flex items-center gap-4">
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-600">
                       {step.step}
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900">{step.title}</h3>
+                    <Heading as="h3" size="lg">
+                      {step.title}
+                    </Heading>
                   </div>
                   <div className="mb-3 rounded-md bg-gray-900 p-3 font-mono text-sm text-green-400">
                     $ {step.command}
                   </div>
-                  <p className="text-gray-600">{step.description}</p>
-                </div>
+                  <Text color="muted">{step.description}</Text>
+                </Card>
               ))}
-            </div>
+            </Grid>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Project Structure Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-gray-900">Project Structure</h2>
-          <p className="mx-auto max-w-2xl text-gray-600">
-            Well-organized folder structure following React best practices.
-          </p>
-        </div>
+      <section className="py-16">
+        <Container size="lg">
+          <div className="mb-12 text-center">
+            <Heading as="h2" size="3xl" className="mb-4">
+              Project Structure
+            </Heading>
+            <Text color="muted" className="mx-auto max-w-2xl">
+              Well-organized folder structure following React best practices.
+            </Text>
+          </div>
 
-        <div className="mx-auto max-w-4xl">
-          <div className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
-            {folderStructure.map((folder, index) => (
-              <div
-                key={index}
-                className={`p-6 ${index !== folderStructure.length - 1 ? 'border-b border-gray-100' : ''}`}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="mt-1 text-blue-600">{folder.icon}</div>
-                  <div className="flex-1">
-                    <h3 className="mb-2 font-mono text-lg font-semibold text-gray-900">
-                      {folder.name}
-                    </h3>
-                    <p className="text-gray-600">{folder.description}</p>
+          <div className="mx-auto max-w-4xl">
+            <Card variant="outlined" padding="none">
+              {folderStructure.map((folder, index) => (
+                <div
+                  key={index}
+                  className={`p-6 ${index !== folderStructure.length - 1 ? 'border-b border-gray-100' : ''}`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1 text-blue-600">{folder.icon}</div>
+                    <div className="flex-1">
+                      <Heading as="h3" size="lg" className="mb-2 font-mono">
+                        {folder.name}
+                      </Heading>
+                      <Text color="muted">{folder.description}</Text>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </Card>
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Available Scripts Section */}
       <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
+        <Container size="lg">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-gray-900">Available Scripts</h2>
-            <p className="mx-auto max-w-2xl text-gray-600">
+            <Heading as="h2" size="3xl" className="mb-4">
+              Available Scripts
+            </Heading>
+            <Text color="muted" className="mx-auto max-w-2xl">
               Pre-configured scripts for development, building, and code quality.
-            </p>
+            </Text>
           </div>
 
           <div className="mx-auto grid max-w-3xl gap-4">
@@ -262,65 +278,80 @@ const HomeView = () => {
               { command: 'npm run lint', description: 'Run ESLint to check code quality' },
               { command: 'npm run format', description: 'Format code with Prettier' },
             ].map((script, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between rounded-lg border border-gray-100 bg-white p-4"
-              >
+              <Card key={index} variant="outlined" padding="md">
                 <div>
                   <code className="rounded bg-gray-900 px-3 py-1 font-mono text-sm text-green-400">
                     {script.command}
                   </code>
-                  <p className="mt-2 text-gray-600">{script.description}</p>
+                  <Text color="muted" className="mt-2">
+                    {script.description}
+                  </Text>
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Redux State Demo */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-gray-900">Redux State Demo</h2>
-          <p className="mx-auto max-w-2xl text-gray-600">
-            Example Redux state from the products slice. Open Redux DevTools to explore.
-          </p>
-        </div>
+      <section className="py-16">
+        <Container size="xl">
+          <div className="mb-12 text-center">
+            <Heading as="h2" size="3xl" className="mb-4">
+              Redux State Demo
+            </Heading>
+            <Text color="muted" className="mx-auto max-w-2xl">
+              Example Redux state from the products slice. Open Redux DevTools to explore.
+            </Text>
+          </div>
 
-        <div className="mx-auto max-w-7xl overflow-hidden">
-          <div className="rounded-xl bg-gray-900 p-6 font-mono text-sm text-green-400">
-            <div className="mb-2 text-yellow-400">// Current Redux State:</div>
-            <pre>{JSON.stringify(productsState, null, 2)}</pre>
+          <div className="mx-auto overflow-hidden">
+            <div className="rounded-xl bg-gray-900 p-6 font-mono text-sm text-green-400">
+              <div className="mb-2 text-yellow-400">// Current Redux State:</div>
+              <pre>{JSON.stringify(productsState, null, 2)}</pre>
+            </div>
+            <div className="mt-4 text-center">
+              <Text size="sm" color="muted">
+                💡 Install Redux DevTools browser extension to inspect and debug state changes
+              </Text>
+            </div>
           </div>
-          <div className="mt-4 text-center">
-            <p className="text-sm text-gray-600">
-              💡 Install Redux DevTools browser extension to inspect and debug state changes
-            </p>
-          </div>
-        </div>
+        </Container>
       </section>
 
       {/* Call to Action */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 py-16 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-4 text-3xl font-bold">Ready to Build Something Amazing?</h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-blue-100">
-            Start building your next React application with this production-ready boilerplate.
-          </p>
+      <section className="bg-linear-to-r from-blue-600 to-purple-600 py-16 text-white">
+        <Container size="lg">
+          <div className="text-center">
+            <Heading as="h2" size="3xl" className="mb-4 text-white">
+              Ready to Build Something Amazing?
+            </Heading>
+            <Text size="lg" className="mx-auto mb-8 max-w-2xl text-blue-100">
+              Start building your next React application with this production-ready boilerplate.
+            </Text>
 
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <button className="flex items-center gap-2 rounded-lg bg-white px-8 py-3 font-semibold text-blue-600 transition-all duration-300 hover:bg-gray-100">
-              <CheckCircle className="h-5 w-5" />
-              Start Development
-            </button>
-            <button className="flex items-center gap-2 rounded-lg border border-white/20 px-8 py-3 font-semibold text-white transition-all duration-300 hover:bg-white/10">
-              <Github className="h-5 w-5" />
-              View on GitHub
-            </button>
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button
+                variant="secondary"
+                size="lg"
+                leftIcon={<CheckCircle className="h-5 w-5" />}
+                className="bg-white text-blue-600 hover:bg-gray-100"
+              >
+                Start Development
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                leftIcon={<Github className="h-5 w-5" />}
+                className="border-white/20 text-white hover:bg-white/10"
+              >
+                View on GitHub
+              </Button>
+            </div>
           </div>
-        </div>
+        </Container>
       </section>
-    </div>
+    </>
   );
 };
 

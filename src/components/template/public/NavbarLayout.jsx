@@ -15,13 +15,13 @@ const NavbarLayout = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="border-b border-gray-200 bg-white shadow-sm">
+    <nav className="border-b border-gray-100 bg-white shadow-xs">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-blue-600 to-purple-600">
-              <span className="text-sm font-bold text-white">RB</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-b from-green-800 to-orange-200">
+              <span className="text-lg font-bold text-white">RB</span>
             </div>
             <span className="text-xl font-bold text-gray-900">React Boilerplate</span>
           </Link>
